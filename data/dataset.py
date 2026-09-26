@@ -30,11 +30,6 @@ class CustomDataset(Dataset):
             )
         self.tokenizer = Tokenizer.from_file(str(tokenizer_path))
         
-        # Print list of tokens in the tokenizer (remove later)
-        # Print if the tokenizer has truncation enabled (remove later)
-        print(self.tokenizer.get_vocab())
-        print(self.tokenizer.truncation)
-        
         # Enable padding with the specified length because trained tokenizer has dynamic padding by default.
         self.tokenizer.enable_padding(
             # Important to specify length here, or else dynamic padding used.
@@ -58,7 +53,7 @@ class CustomDataset(Dataset):
             ) from error
 
         encoding = self.tokenizer.encode(text)
-
+        # Converting HF arryys to torch tensors
         return {
             "input_ids": torch.tensor(encoding.ids, dtype=torch.long),
             "attention_mask": torch.tensor(

@@ -5,7 +5,7 @@ __pycache__/
 
 # C extensions
 *.so
-
+*humanitarian_bpe_tokenizer.json
 # Distribution / packaging
 .Python
 build/

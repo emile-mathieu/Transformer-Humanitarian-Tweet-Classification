@@ -31,11 +31,13 @@ class CustomDataset(Dataset):
         self.tokenizer = Tokenizer.from_file(str(tokenizer_path))
         
         # Print list of tokens in the tokenizer (remove later)
+        # Print if the tokenizer has truncation enabled (remove later)
         print(self.tokenizer.get_vocab())
-
-        self.tokenizer.enable_truncation(max_length=self.max_length)
+        print(self.tokenizer.truncation)
+        
+        # Enable padding with the specified length because trained tokenizer has dynamic padding by default.
         self.tokenizer.enable_padding(
-            # Important to sepecify length here, or else dynamic padding used.
+            # Important to specify length here, or else dynamic padding used.
             length=self.max_length,
             pad_id=self.tokenizer.token_to_id("<PAD>"),
             pad_token="<PAD>",

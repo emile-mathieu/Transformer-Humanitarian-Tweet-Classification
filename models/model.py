@@ -40,7 +40,6 @@ class TweetTransformer(nn.Module):
         num_classes=11,
         max_seq_length=128,
         dropout=0.1,
-        batch_first=True
     ):
         super(TweetTransformer, self).__init__()
         # Token embeddings
@@ -54,7 +53,7 @@ class TweetTransformer(nn.Module):
             nhead=num_heads,
             dim_feedforward=dim_feedforward,
             dropout=dropout,
-            batch_first=batch_first
+            batch_first=True,
             activation='relu'
         )
 

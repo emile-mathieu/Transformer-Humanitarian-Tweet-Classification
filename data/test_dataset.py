@@ -9,7 +9,7 @@ if __name__ == "__main__":
         {"tweet_text": "Hello @user, how are you?", "class_label": 0},
         {"tweet_text": "This is a test tweet with &amp;", "class_label": 2},
     ]
-
+    # Change tokenizer path if necessary.
     dataset = CustomDataset(data, tokenizer_path="../tokenizer/humanitarian_bpe_tokenizer.json")
 
     for i in range(len(dataset)):

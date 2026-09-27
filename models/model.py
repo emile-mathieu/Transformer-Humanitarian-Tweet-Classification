@@ -45,9 +45,15 @@ class TweetTransformer(nn.Module):
         # Token embeddings
         self.embedding = nn.Embedding(vocab_size,embed_dim)
         # Sinusoidal positional encoding
-        
         self.positional_encoding = PositionalEncoding(embed_dim,max_seq_length)
+        
         # Single Transformer encoder layer
+        # Dimensions of model per head 512 / 8 = 64
+        
+        # We concatenate the outputs of all heads, so the output dimension is 512.
+        
+        # Then FF layer has input dimension 512 and output dimension 2048,
+        # Followed by another linear layer that projects it back to 512.
         encoder_layer = nn.TransformerEncoderLayer(
             d_model=embed_dim,
             nhead=num_heads,

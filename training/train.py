@@ -57,6 +57,7 @@ def train_model(model,train_data, tokenizer_path, batch_size=32, num_epochs=15, 
 
             optimizer.zero_grad()
 
+            # Output size is (batch_size, num_classes)
             outputs = model(input_ids, attention_mask)
 
             loss = criterion(outputs, labels)
@@ -73,6 +74,7 @@ def train_model(model,train_data, tokenizer_path, batch_size=32, num_epochs=15, 
             train_total_loss += loss.item()
 
             # Track accuracy
+            # dim=1 because we have num of dimensions = 2, (batch_size, num_classes), and we want to get the index of the max value along the class dimension
             predictions = outputs.argmax(dim=1)
 
             # Same here, need to convert to item() to get the number of correct predictions

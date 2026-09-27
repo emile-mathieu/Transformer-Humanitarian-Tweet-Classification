@@ -17,7 +17,7 @@ class PositionalEncoding(nn.Module):
         positional_encoding[0, :, 0::2] = torch.sin(position * div_term)
 
         # Odd dimensions use cos
-        positional_encoding[0, :, 1::2] = torch.cos(position * div_term)
+        positional_encoding[0, :, 1::2] = torch.cos(position * div_term[:embed_dim // 2])
 
         # Positional encoding is fixed, not learnable
         self.register_buffer(

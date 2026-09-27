@@ -29,7 +29,7 @@ class CustomDataset(Dataset):
                 "Run tokenizer/tokenizer.ipynb and save the tokenizer first."
             )
         self.tokenizer = Tokenizer.from_file(str(tokenizer_path))
-        
+        self.tokenizer.enable_truncation(max_length=self.max_length)
         # Enable padding with the specified length because trained tokenizer has dynamic padding by default.
         self.tokenizer.enable_padding(
             # Important to specify length here, or else dynamic padding used.

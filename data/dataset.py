@@ -17,7 +17,7 @@ def clean_text(text):
     return text
 
 class CustomDataset(Dataset):
-    def __init__(self, data, tokenizer_path=None):
+    def __init__(self, data, tokenizer_path):
         self.data = data
         self.max_length = 128 
 

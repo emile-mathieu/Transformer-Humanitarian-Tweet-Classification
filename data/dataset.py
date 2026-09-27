@@ -53,7 +53,8 @@ class CustomDataset(Dataset):
             ) from error
 
         encoding = self.tokenizer.encode(text)
-        # Converting HF arryys to torch tensors
+        # Converting HF arrays to torch tensors
+        # Returning a dictionary with input_ids, attention_mask, and labels for each sample
         return {
             "input_ids": torch.tensor(encoding.ids, dtype=torch.long),
             "attention_mask": torch.tensor(

@@ -13,6 +13,7 @@ def clean_text(text):
     text = " ".join(text.split())
     text = re.sub(r"http\S+|www\S+|https\S+", "<URL>", text)
     text = re.sub(r"@\w+", "<MENTION>", text)
+    text = text.replace("&amp;", "&")
     return text
 
 cleaned_training_texts = [

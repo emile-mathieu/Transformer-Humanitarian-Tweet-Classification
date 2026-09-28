@@ -7,12 +7,12 @@ from data.dataloader import create_train_dataloader, create_eval_dataloader
 from utils import save_metrics
 
 
-def train_model(model,train_data, tokenizer_path, batch_size=32, num_epochs=15, d_model=512, warmup_steps=4000):
+def train_model(model,train_data, val_data, tokenizer_path, batch_size=32, num_epochs=15, d_model=512, warmup_steps=4000):
     # Create the DataLoader for training data
     train_loader = create_train_dataloader(train_data, tokenizer_path, batch_size=batch_size)
 
     # Create the DataLoader for evaluation data
-    eval_loader = create_eval_dataloader(train_data, tokenizer_path, batch_size=batch_size)
+    eval_loader = create_eval_dataloader(val_data, tokenizer_path, batch_size=batch_size)
 
     # Cross entropy for multi-class classification
     criterion = nn.CrossEntropyLoss()

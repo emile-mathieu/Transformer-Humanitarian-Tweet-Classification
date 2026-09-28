@@ -1,27 +1,37 @@
-import csv
-import os
-
-def save_metrics(
+def save_evaluation_metrics(
     metrics,
-    filepath="results/train_metrics.csv"
+    filepath="results/evaluation_metrics.csv"
 ):
-    # Create parent folder if it doesn't exist
-    parent = os.path.dirname(filepath)
-    if parent:
-        os.makedirs(parent, exist_ok=True)
+    """
+    Save final validation and test metrics.
+    """
 
-    with open(filepath, "w", newline="") as file:
-        writer = csv.DictWriter(
-            file,
-            fieldnames=[
-                "epoch",
-                "train_loss",
-                "train_accuracy",
-                "val_loss",
-                "val_accuracy",
-                "learning_rate"
-            ]
+    columns = [
+        "val_loss",
+        "val_accuracy",
+        "val_recall",
+        "val_f1_score",
+        "test_loss",
+        "test_accuracy",
+        "test_recall",
+        "test_f1_score"
+    ]
+
+    df = pd.DataFrame([metrics])
+
+    missing_columns = [
+        column
+        for column in columns
+        if column not in df.columns
+    ]
+
+    if missing_columns:
+        raise ValueError(
+            f"Missing evaluation metric columns: {missing_columns}"
         )
 
-        writer.writeheader()
-        writer.writerows(metrics)
+    df = df[columns]
+
+    _ensure_parent_directory(filepath)
+
+    df.to_csv(filepath, index=False)

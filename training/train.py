@@ -4,7 +4,7 @@ import torch.nn as nn
 from models.model import TweetTransformer
 from data.dataloader import create_train_dataloader, create_eval_dataloader
 
-from utils import save_metrics
+from utils import save_training_history
 
 
 def train_model(model,train_data, val_data, tokenizer_path, batch_size=32, num_epochs=15, d_model=512, warmup_steps=4000):
@@ -135,4 +135,5 @@ def train_model(model,train_data, val_data, tokenizer_path, batch_size=32, num_e
             print(f"Early stopping at epoch {epoch + 1} due to low validation loss.")
             break
 
-    save_metrics(metrics)
+    save_training_history(metrics)
+    return metrics

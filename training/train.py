@@ -4,8 +4,6 @@ import torch.nn as nn
 from models.model import TweetTransformer
 from data.dataloader import create_train_dataloader, create_eval_dataloader
 
-from utils import save_training_history
-
 
 def train_model(
     model,
@@ -200,6 +198,5 @@ def train_model(
                 f"{patience} consecutive epochs."
             )
             break
-    save_training_history(metrics)
 
     return metrics

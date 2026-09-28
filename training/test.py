@@ -5,8 +5,7 @@ from sklearn.metrics import recall_score, f1_score
 
 from data.dataloader import create_eval_dataloader, create_test_dataloader
 
-from utils import save_evaluation_metrics
-def test_model(
+def evaluate_model(
     model,
     val_data,
     test_data,
@@ -173,7 +172,5 @@ def test_model(
         "test_recall": test_recall,
         "test_f1_score": test_f1,
     }
-
-    save_evaluation_metrics(metrics)
 
     return metrics

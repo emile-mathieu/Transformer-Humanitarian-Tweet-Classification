@@ -64,8 +64,8 @@ def test_model(model, val_data, test_data, tokenizer_path, batch_size=32):
 
     val_avg_loss = val_total_loss / len(val_loader)
     val_accuracy = val_total_correct / val_total_samples
-    val_recall = recall_score(val_targets, val_predictions, average="macro", zero_division=0)
-    val_f1 = f1_score(val_targets, val_predictions, average="macro", zero_division=0)
+    val_recall = recall_score(val_targets, val_predictions, labels=range(model.fc.out_features), average="macro", zero_division=0)
+    val_f1 = f1_score(val_targets, val_predictions, labels=range(model.fc.out_features), average="macro", zero_division=0)
 
     test_avg_loss = test_total_loss / len(test_loader)
     test_accuracy = test_total_correct / test_total_samples

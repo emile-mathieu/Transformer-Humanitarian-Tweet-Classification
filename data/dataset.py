@@ -42,6 +42,7 @@ class CustomDataset(Dataset):
         return len(self.data)
 
     def __getitem__(self, idx):
+        # This would give a row of the dataset, which is a dictionary with keys 'tweet_text' and 'class_label'
         row = self.data[idx]
 
         try:

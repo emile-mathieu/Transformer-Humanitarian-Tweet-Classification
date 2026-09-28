@@ -2,7 +2,6 @@ import torch
 import torch.nn as nn
 
 from data.dataloader import create_test_dataloader
-from utils import save_metrics
 
 from sklearn.metrics import recall_score, f1_score
 

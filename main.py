@@ -8,7 +8,8 @@ from models.model import TweetTransformer
 
 from data.dataloader import create_train_dataloader, create_eval_dataloader
 
-from training.train import train_model, evaluate_model
+from training.train import train_model
+from training.test import evaluate_model
 
 from utils import save_training_history, save_evaluation_metrics
 

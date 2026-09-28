@@ -6,6 +6,7 @@ from sklearn.metrics import recall_score, f1_score
 from data.dataloader import create_eval_dataloader, create_test_dataloader
 
 def evaluate_model(
+    device,
     model,
     val_data,
     test_data,
@@ -43,9 +44,9 @@ def evaluate_model(
 
         # ---------------- VALIDATION ----------------
         for batch in val_loader:
-            input_ids = batch["input_ids"]
-            attention_mask = batch["attention_mask"]
-            labels = batch["labels"]
+            input_ids = batch["input_ids"].to(model.device)
+            attention_mask = batch["attention_mask"].to(model.device)
+            labels = batch["labels"].to(model.device)
 
             outputs = model(
                 input_ids,
@@ -81,9 +82,9 @@ def evaluate_model(
 
         # ---------------- TEST ----------------
         for batch in test_loader:
-            input_ids = batch["input_ids"]
-            attention_mask = batch["attention_mask"]
-            labels = batch["labels"]
+            input_ids = batch["input_ids"].to(device)
+            attention_mask = batch["attention_mask"].to(device)
+            labels = batch["labels"].to(device)
 
             outputs = model(
                 input_ids,

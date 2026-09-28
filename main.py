@@ -32,7 +32,7 @@ def main() -> None:
     test_data = dataset["test"]
     
     current_path = os.path.dirname(os.path.abspath(__file__))
-    tokenizer_path = os.path.join(current_path, "tokenizer", "tokenizer.json")
+    tokenizer_path = os.path.join(current_path, "tokenizer", "humanitarian_bpe_tokenizer.json")
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = TweetTransformer().to(device)

@@ -1,20 +1,21 @@
 import torch
 import torch.nn as nn
 
-from models.model import TweetTransformer
 from data.dataloader import create_train_dataloader, create_eval_dataloader
 
 
 def train_model(
-    model,
-    train_data,
-    val_data,
-    tokenizer_path,
-    batch_size=32,
-    num_epochs=15,
-    d_model=512,
+    device, 
+    model, 
+    train_data, 
+    val_data, 
+    tokenizer_path, 
+    batch_size=32, 
+    num_epochs=15, 
+    d_model=512, 
     warmup_steps=4000
 ):
+
     # Create DataLoaders
     train_loader = create_train_dataloader(
         train_data,
@@ -73,9 +74,9 @@ def train_model(
         train_total_samples = 0
 
         for batch in train_loader:
-            input_ids = batch["input_ids"]
-            attention_mask = batch["attention_mask"]
-            labels = batch["labels"]
+            input_ids = batch["input_ids"].to(device)
+            attention_mask = batch["attention_mask"].to(device)
+            labels = batch["labels"].to(device)
 
             optimizer.zero_grad()
 
@@ -126,9 +127,9 @@ def train_model(
 
         with torch.no_grad():
             for batch in eval_loader:
-                input_ids = batch["input_ids"]
-                attention_mask = batch["attention_mask"]
-                labels = batch["labels"]
+                input_ids = batch["input_ids"].to(device)
+                attention_mask = batch["attention_mask"].to(device)
+                labels = batch["labels"].to(device)
 
                 outputs = model(
                     input_ids,
@@ -183,6 +184,7 @@ def train_model(
             best_val_loss = val_avg_loss
             patience_counter = 0
 
+            # This is saved in the directory where the script is run.
             torch.save(
                 model.state_dict(),
                 "best_model.pth"

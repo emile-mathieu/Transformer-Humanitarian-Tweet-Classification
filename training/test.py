@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 
 from models.model import TweetTransformer
-from data.dataloaders import create_test_dataloader
+from data.dataloader import create_test_dataloader
 
 from utils import save_metrics
 

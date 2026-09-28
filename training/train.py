@@ -1,19 +1,10 @@
 import torch
 import torch.nn as nn
 
-from models.model import TweetTransformer
 from data.dataloader import create_train_dataloader, create_eval_dataloader
 
 
-def train_model(
-    model,
-    train_data,
-    val_data,
-    tokenizer_path,
-    batch_size=32,
-    num_epochs=15,
-    d_model=512,
-    warmup_steps=4000
+def train_model(model, train_data, val_data, tokenizer_path, batch_size=32, num_epochs=15, d_model=512, warmup_steps=4000
 ):
     # Create DataLoaders
     train_loader = create_train_dataloader(
@@ -183,6 +174,7 @@ def train_model(
             best_val_loss = val_avg_loss
             patience_counter = 0
 
+            # This is saved in the directory where the script is run.
             torch.save(
                 model.state_dict(),
                 "best_model.pth"

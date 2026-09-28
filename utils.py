@@ -6,10 +6,9 @@ def save_metrics(
     filepath="results/train_metrics.csv"
 ):
     # Create parent folder if it doesn't exist
-    os.makedirs(
-        os.path.dirname(filepath),
-        exist_ok=True
-    )
+    parent = os.path.dirname(filepath)
+    if parent:
+        os.makedirs(parent, exist_ok=True)
 
     with open(filepath, "w", newline="") as file:
         writer = csv.DictWriter(

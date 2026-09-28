@@ -44,9 +44,9 @@ def evaluate_model(
 
         # ---------------- VALIDATION ----------------
         for batch in val_loader:
-            input_ids = batch["input_ids"].to(model.device)
-            attention_mask = batch["attention_mask"].to(model.device)
-            labels = batch["labels"].to(model.device)
+            input_ids = batch["input_ids"].to(device)
+            attention_mask = batch["attention_mask"].to(device)
+            labels = batch["labels"].to(device)
 
             outputs = model(
                 input_ids,

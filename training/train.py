@@ -35,7 +35,7 @@ def train_model(
     # Adam configuration from Attention Is All You Need
     optimizer = torch.optim.Adam(
         model.parameters(),
-        lr=1.0,
+        lr=0.125,
         betas=(0.9, 0.98),
         eps=1e-9
     )

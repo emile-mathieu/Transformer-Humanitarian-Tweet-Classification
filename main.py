@@ -27,15 +27,35 @@ def main() -> None:
     # Load the dataset
     dataset = load_data()
     
+    # Build the label mapping using only the training split
+    label_names = sorted(set(dataset["train"]["class_label"]))
+    label_to_id = {
+        label: index
+        for index, label in enumerate(label_names)
+    }
+
+    print("Label mapping:")
+    for label, index in label_to_id.items():
+        print(f"  {index}: {label}")
+
+    # Convert string labels into integer class IDs
+    dataset = dataset.map(
+        lambda row: {
+            "class_label": label_to_id[row["class_label"]]
+        }
+    )
+
     train_data = dataset["train"]
     val_data = dataset["validation"]
     test_data = dataset["test"]
-    
+
     current_path = os.path.dirname(os.path.abspath(__file__))
     tokenizer_path = os.path.join(current_path, "tokenizer", "humanitarian_bpe_tokenizer.json")
     
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model = TweetTransformer().to(device)
+    model = TweetTransformer(
+        num_classes=len(label_names)
+    ).to(device)
 
     # Train the model
     training_metrics = train_model(device, model, train_data, val_data, tokenizer_path)

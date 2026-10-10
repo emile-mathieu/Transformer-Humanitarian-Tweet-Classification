@@ -14,6 +14,9 @@ from training.evaluate import evaluate_model
 from utils import save_training_history, save_evaluation_metrics
 
 
+SEED = 42
+
+
 def load_data():
     data_files = {
     "train": "https://huggingface.co/datasets/QCRI/HumAID-all/resolve/main/data/train-00000-of-00001.parquet",
@@ -24,6 +27,10 @@ def load_data():
     return ds
 
 def main() -> None:
+    torch.manual_seed(SEED)
+    if torch.cuda.is_available():
+        torch.cuda.manual_seed_all(SEED)
+
     # Load the dataset
     dataset = load_data()
     
